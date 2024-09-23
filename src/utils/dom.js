@@ -1,1 +1,1 @@
-export const selectedById = (id) => document.querySelector(id)
+export const querySelectedById = (id) => document.querySelector(id)
