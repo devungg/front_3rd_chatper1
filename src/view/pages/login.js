@@ -1,12 +1,19 @@
-const pageLogin = /* HTML */ ` <main class="bg-gray-100 flex items-center justify-center min-h-screen">
+import router from '../../router/router'
+import { querySelectedById } from '../../utils/dom'
+import { setLocalStorage } from '../../utils/localStorage'
+
+const loginTemplate = /* HTML */ ` <main class="bg-gray-100 flex items-center justify-center min-h-screen">
   <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
     <h1 class="text-2xl font-bold text-center text-blue-600 mb-8">항해플러스</h1>
-    <form>
+    <form id="login-form">
       <div class="mb-4">
-        <input type="text" placeholder="이메일 또는 전화번호" class="w-full p-2 border rounded" />
+        <input type="text" id="username" placeholder="사용자 이름" class="w-full p-2 border rounded" />
+      </div>
+      <div class="mb-4">
+        <input type="text" id="email" placeholder="이메일" class="w-full p-2 border rounded" />
       </div>
       <div class="mb-6">
-        <input type="password" placeholder="비밀번호" class="w-full p-2 border rounded" />
+        <input type="password" id="password" placeholder="비밀번호" class="w-full p-2 border rounded" />
       </div>
       <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded font-bold">로그인</button>
     </form>
@@ -20,4 +27,29 @@ const pageLogin = /* HTML */ ` <main class="bg-gray-100 flex items-center justif
   </div>
 </main>`
 
+class PageLogin {
+  render() {
+    return (querySelectedById('#root').innerHTML = loginTemplate)
+  }
+  setEvent() {
+    this.#submit()
+  }
+
+  #submit() {
+    querySelectedById('#login-form').addEventListener('submit', (e) => {
+      e.preventDefault()
+      const username = querySelectedById('#username').value
+      const email = querySelectedById('#email').value
+      setLocalStorage('user', {
+        username,
+        email,
+        bio: '',
+      })
+      setLocalStorage('isLogin', true) // 임시
+      router.navigateTo('/')
+    })
+  }
+}
+
+const pageLogin = new PageLogin()
 export default pageLogin

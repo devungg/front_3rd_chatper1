@@ -6,22 +6,22 @@ import pageError from '../view/pages/error'
 const ROUTER_MAP = {
   HOME: {
     path: '/',
-    view: pageHome,
+    page: pageHome,
     isAuth: false,
   },
   LOGIN: {
     path: '/login',
-    view: pageLogin,
+    page: pageLogin,
     isAuth: false,
   },
   PROFILE: {
     path: '/profile',
-    view: pageProfile,
+    page: pageProfile,
     isAuth: true,
   },
   NOT_FOUND: {
     path: '/nonexistent',
-    view: pageError,
+    page: pageError,
     isAuth: false,
   },
 }
