@@ -24,6 +24,11 @@ const ROUTER_MAP = {
     page: pageError,
     isAuth: false,
   },
+  404: {
+    path: '/404',
+    page: pageError,
+    isAuth: false,
+  },
 }
 
 export default ROUTER_MAP
