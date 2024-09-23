@@ -1,8 +1,7 @@
 import ROUTER_MAP from './routerMap'
-import { selectedById } from '../utils/dom'
 import { getLocalStorage } from '../utils/localStorage'
 
-export default class Router {
+class Router {
   constructor() {
     this.routes = {}
     window.addEventListener('popstate', this.handlePopState.bind(this))
@@ -41,10 +40,16 @@ export default class Router {
   }
 
   setRouter() {
-    Object.values(ROUTER_MAP).forEach(({ path, view, isAuth }) => {
-      const handler = () => (selectedById('#root').innerHTML = view)
+    Object.values(ROUTER_MAP).forEach(({ path, page, isAuth }) => {
+      const handler = () => {
+        page.render()
+        page.setEvent()
+      }
       this.addRoute(path, handler, isAuth)
     })
     this.handleRoute(window.location.pathname)
   }
 }
+
+const router = new Router()
+export default router
